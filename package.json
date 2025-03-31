@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
-  "packageManager": "bun@1.0.30",
+  "packageManager": "bun@1.2.7",
   "scripts": {
     "build": "bun run nest build",
     "build:bun": "bun build --target=bun ./src/main.ts --outdir=./dist",
@@ -22,6 +22,10 @@
     "test:cov": "bun vitest run --coverage",
     "test:debug": "bun vitest --inspect-brk",
     "test:e2e": "bun vitest run -c vitest.e2e.config.ts",
+    "test:actions": "act --container-architecture linux/amd64 -j test",
+    "test:actions:e2e": "act --container-architecture linux/amd64 -j test -W .github/workflows/e2e-tests.yml",
+    "test:actions:docker": "act --container-architecture linux/amd64 -j build-and-push -W .github/workflows/docker-build-deploy.yml --secret GITHUB_TOKEN=dummy-token",
+    "test:actions:all": "act --container-architecture linux/amd64",
     "clean-install": "rm -rf node_modules && bun install"
   },
   "dependencies": {

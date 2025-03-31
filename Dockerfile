@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for Telegram Bot
 
 # Build stage
-FROM oven/bun:1.0.30 AS build
+FROM oven/bun:1.2.7 AS build
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY . .
 RUN bun run build
 
 # Production stage
-FROM oven/bun:1.0.30-slim AS production
+FROM oven/bun:1.2.7-slim AS production
 
 WORKDIR /app
 

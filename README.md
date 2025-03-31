@@ -308,6 +308,37 @@ bun test:e2e
 - `test/llm.e2e-spec.ts` - Tests for the LlmService
 - `test/mocks/` - Mock services used for testing
 
+### Testing GitHub Actions Locally
+
+This project includes GitHub Actions workflows for CI/CD. You can test these workflows locally using [act](https://github.com/nektos/act), a tool that allows you to run GitHub Actions locally using Docker.
+
+#### Prerequisites
+
+1. Install [act](https://github.com/nektos/act#installation)
+2. Make sure Docker is running on your machine
+
+#### Available Scripts
+
+```bash
+# Run unit tests workflow locally
+bun test:actions
+
+# Run E2E tests workflow locally
+bun test:actions:e2e
+
+# Run Docker build and deploy workflow locally
+bun test:actions:docker
+
+# Run all GitHub Actions workflows locally
+bun test:actions:all
+```
+
+#### Notes
+
+- The Docker build and deploy workflow requires a GitHub token for authentication. The script uses a dummy token for local testing.
+- Some actions might require additional setup or might not work exactly the same as they do on GitHub.
+- The `--container-architecture linux/amd64` flag is used to ensure compatibility with GitHub Actions runners, which use Linux.
+
 ### Adding New Features
 
 - **New LLM Providers**: Extend the `LlmService` class in `src/llm/llm.service.ts`

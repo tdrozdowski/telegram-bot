@@ -1,0 +1,30 @@
+name: E2E Tests
+
+on:
+  workflow_run:
+    workflows: ["Unit Tests"]
+    types:
+      - completed
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2.0.1
+        with:
+          bun-version: 1.2.7
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run E2E tests
+        run: bun test:e2e
