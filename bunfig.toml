@@ -1,0 +1,19 @@
+# Bun Configuration File
+
+# Package manager settings
+[install]
+# Use the exact versions specified in package.json
+exact = true
+# Don't hoist dependencies to the root of node_modules
+# This can help with compatibility issues
+no-hoist = true
+
+# Runtime settings
+[runtime]
+# Enable source maps for better debugging
+source-maps = true
+
+# Test settings
+[test]
+# Use Jest compatibility mode
+jest-compatibility = true

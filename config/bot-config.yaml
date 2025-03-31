@@ -1,0 +1,61 @@
+# Telegram Bot Configuration
+
+# Bot settings
+bot:
+  # Your Telegram bot token from BotFather
+  token: "YOUR_TELEGRAM_BOT_TOKEN"
+  
+  # Webhook configuration (for production)
+  webhook:
+    enabled: false
+    url: "https://your-domain.com/telegram/webhook"
+    port: 3000
+  
+  # Polling configuration (for development)
+  polling:
+    enabled: true
+
+# Personality settings
+personality:
+  name: "Grok Bot"
+  description: "A helpful AI assistant powered by Grok 3"
+  traits:
+    - "Friendly"
+    - "Knowledgeable"
+    - "Witty"
+    - "Helpful"
+  tone: "conversational"
+  responseStyle: "concise yet informative"
+
+# Channels to join
+channels:
+  - id: "@your_channel"
+    name: "Your Channel"
+    autoJoin: true
+  - id: "-1001234567890"
+    name: "Your Group"
+    autoJoin: true
+
+# LLM settings
+llm:
+  # Provider options: grok, openai, anthropic, custom
+  provider: "grok"
+  apiKey: "YOUR_API_KEY"
+  model: "grok-3"
+  # endpoint: "https://api.grok.x/v1/chat/completions"  # Optional custom endpoint
+  maxTokens: 1000
+  temperature: 0.7
+  # Optional custom system prompt (if not provided, one will be generated from personality)
+  # systemPrompt: "You are Grok Bot, a helpful AI assistant..."
+
+# Additional settings
+settings:
+  logLevel: "info"
+  # Optional list of allowed user IDs (if empty, all users are allowed)
+  allowedUsers: []
+  # Optional list of blacklisted user IDs
+  blacklistedUsers: []
+  # Optional command prefix for custom commands
+  commandPrefix: "!"
+  # Optional delay in milliseconds before sending response (for more human-like timing)
+  responseDelay: 500
