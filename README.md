@@ -202,6 +202,40 @@ services:
     restart: unless-stopped
 ```
 
+## Kubernetes Deployment
+
+This project includes Kubernetes manifests for deploying to a Kubernetes cluster.
+
+### Prerequisites
+
+- Kubernetes cluster (e.g., Minikube, GKE, EKS, AKS)
+- kubectl installed and configured
+- Docker image of the application (built from the Dockerfile in the root directory)
+
+### Deployment Steps
+
+1. Navigate to the k8s directory:
+   ```bash
+   cd k8s
+   ```
+
+2. Review and update the configuration:
+   - Update the image reference in `deployment.yaml`
+   - Configure secrets in `secrets.yaml`
+   - Adjust the ConfigMap in `configmap.yaml`
+
+3. Validate the Kubernetes manifests:
+   ```bash
+   ./validate.sh
+   ```
+
+4. Deploy to your Kubernetes cluster:
+   ```bash
+   kubectl apply -k .
+   ```
+
+For detailed instructions, see the [Kubernetes Deployment README](k8s/README.md).
+
 ## Configuration
 
 The bot is configured via a YAML file. See `config/bot-config.yaml` for a sample configuration with comments.
