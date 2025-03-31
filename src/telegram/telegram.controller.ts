@@ -1,7 +1,8 @@
 import { Controller, Post, Body, Logger, Req, Res } from '@nestjs/common';
 import { TelegramService } from './telegram.service';
 import { ConfigService } from '../config/config.service';
-import { Request, Response } from 'express';
+// Use type-only import for Express types
+import type { Request, Response } from 'express';
 
 @Controller('telegram')
 export class TelegramController {
@@ -20,7 +21,7 @@ export class TelegramController {
       if (this.configService && typeof this.configService.getBotConfig === 'function') {
         const botConfig = this.configService.getBotConfig();
         if (botConfig && botConfig.webhook) {
-          this.webhookEnabled = botConfig.webhook.enabled || false;
+          this.webhookEnabled = Boolean(botConfig.webhook.enabled);
         }
       }
     } catch (error) {
