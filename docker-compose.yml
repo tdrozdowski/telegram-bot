@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./config/bot-config.yaml:/app/config/bot-config.yaml
+    restart: unless-stopped
+    # Uncomment the following lines to use Docker secrets for sensitive data
+    # secrets:
+    #   - telegram_bot_token
+    #   - llm_api_key
+
+# Uncomment the following section to use Docker secrets
+# secrets:
+#   telegram_bot_token:
+#     file: ./secrets/telegram_bot_token.txt
+#   llm_api_key:
+#     file: ./secrets/llm_api_key.txt

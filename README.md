@@ -144,6 +144,64 @@ You can override the config file path using an environment variable:
 CONFIG_PATH=path/to/your/config.yaml bun start
 ```
 
+## Docker Deployment
+
+This project includes a multi-stage Dockerfile for easy deployment.
+
+### Building the Docker Image
+
+```bash
+docker build -t telegram-bot .
+```
+
+### Running the Docker Container
+
+```bash
+docker run -p 3000:3000 -d --name telegram-bot telegram-bot
+```
+
+### Configuration with Docker
+
+There are several ways to configure the application when running in Docker:
+
+#### 1. Using a Custom Config File
+
+You can mount a custom configuration file:
+
+```bash
+docker run -p 3000:3000 -v /path/to/your/config.yaml:/app/config/bot-config.yaml -d --name telegram-bot telegram-bot
+```
+
+#### 2. Using Environment Variables
+
+You can pass the CONFIG_PATH environment variable:
+
+```bash
+docker run -p 3000:3000 -e CONFIG_PATH=/app/config/custom-config.yaml -d --name telegram-bot telegram-bot
+```
+
+#### 3. Using Docker Secrets (for sensitive data)
+
+For production deployments, consider using Docker secrets for sensitive information like API keys and tokens.
+
+### Example Docker Compose File
+
+```yaml
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./config/bot-config.yaml:/app/config/bot-config.yaml
+    restart: unless-stopped
+```
+
 ## Configuration
 
 The bot is configured via a YAML file. See `config/bot-config.yaml` for a sample configuration with comments.
